@@ -14,7 +14,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  COMPOSE_FILE: compose.yaml
+  COMPOSE_FILE: src/compose.yaml
   APP_IMAGE_TAG: aplicacao:latest
   HEALTH_URLS: |
     http://localhost:8088/actuator/health
@@ -34,8 +34,10 @@ jobs:
           distribution: temurin
           java-version: '17'
           cache: maven
+          cache-dependency-path: src/pom.xml
 
       - name: Rodar testes Maven
+        working-directory: src
         run: mvn -B -DskipTests=false verify
 
       - name: Publicar relatórios de teste
@@ -44,8 +46,8 @@ jobs:
         with:
           name: test-reports
           path: |
-            **/target/surefire-reports/**
-            **/target/failsafe-reports/**
+            src/**/target/surefire-reports/**
+            src/**/target/failsafe-reports/**
           if-no-files-found: ignore
 
       - name: Setup QEMU (opcional, mas útil p/ buildx)
@@ -57,7 +59,7 @@ jobs:
       - name: Build da imagem Docker local (aplicacao:latest)
         uses: docker/build-push-action@v6
         with:
-          context: .
+          context: src
           push: false
           load: true
           tags: ${{ env.APP_IMAGE_TAG }}
