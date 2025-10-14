@@ -8,6 +8,7 @@ COPY pom.xml ./
 RUN --mount=type=cache,target=/root/.m2 \
     mvn -B -q -DskipTests dependency:go-offline
 
+
 # Copia o código e compila
 COPY src ./src
 RUN --mount=type=cache,target=/root/.m2 \
