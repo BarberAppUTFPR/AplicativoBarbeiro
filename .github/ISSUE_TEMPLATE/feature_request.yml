@@ -1,0 +1,15 @@
+name: Feature request
+description: Solicite uma melhoria
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: proposta
+    attributes:
+      label: Proposta
+      description: Qual problema resolve?
+    validations:
+      required: true
+  - type: textarea
+    id: criterios
+    attributes:
+      label: Critérios de aceitação
