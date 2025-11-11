@@ -28,23 +28,7 @@ public class ScheduleController {
 
     @PostMapping
     @PreAuthorize("hasAuthority('BARBER')")
-    public ResponseEntity<ScheduleDTO> create(@RequestBody @Valid CreateScheduleDTO dto,
-                                              @AuthenticationPrincipal AuthenticatedUserDTO authenticatedUser) {
-        return ResponseEntity.ok(service.create(dto));
-    }
-
-    @PostMapping("/{id}/confirm")
-    public ResponseEntity<ScheduleDTO> confirm(@PathVariable UUID id,
-                                               @AuthenticationPrincipal AuthenticatedUserDTO authenticatedUser) {
-        return ResponseEntity.ok(service.confirm(id, authenticatedUser));
-    }
-
-    @PostMapping("/{id}/cancel")
-    public ResponseEntity<ScheduleDTO> cancel(@PathVariable UUID id,
-                                              @AuthenticationPrincipal AuthenticatedUserDTO authenticatedUser) {
-        return ResponseEntity.ok(service.cancel(id, authenticatedUser));
-    }
-
+    
     @GetMapping
     public ResponseEntity<List<ScheduleDTO>> list(@AuthenticationPrincipal AuthenticatedUserDTO authenticatedUser) {
         // Usuarios só podem buscar seus próprios schedules
