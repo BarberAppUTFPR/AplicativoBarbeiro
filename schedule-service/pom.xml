@@ -99,6 +99,44 @@
 
     <build>
         <plugins>
+            <!-- Lint: Checkstyle -->
+<plugin>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-checkstyle-plugin</artifactId>
+  <version>3.5.0</version>
+  <dependencies>
+    <dependency>
+      <groupId>com.puppycrawl.tools</groupId>
+      <artifactId>checkstyle</artifactId>
+      <version>10.17.0</version>
+    </dependency>
+  </dependencies>
+  <configuration>
+    <configLocation>config/checkstyle/checkstyle.xml</configLocation>
+    <consoleOutput>true</consoleOutput>
+    <failsOnError>true</failsOnError>
+    <linkXRef>false</linkXRef>
+  </configuration>
+  <executions>
+    <execution>
+      <phase>verify</phase>
+      <goals>
+        <goal>check</goal>
+      </goals>
+    </execution>
+  </executions>
+</plugin>
+
+<!-- Test runner explícito (opcional, mas ajuda em ambientes CI) -->
+<plugin>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-surefire-plugin</artifactId>
+  <version>3.5.1</version>
+  <configuration>
+    <useModulePath>false</useModulePath>
+  </configuration>
+</plugin>
+
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
