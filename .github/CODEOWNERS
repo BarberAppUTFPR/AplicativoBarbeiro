@@ -1,0 +1,12 @@
+# Define o time de desenvolvimento como proprietário de todo o repositório por padrão.
+# Bruno Modesto
+# Guilherme Ishida
+# Kíria Nakahati
+
+# Módulo de Barbeiro: Bruno Modesto é o responsável.
+# Qualquer alteração nos arquivos dentro desta pasta solicitará a revisão dele.
+/barbeiro/ @bruno-gmodesto
+
+# Módulo de Agendamento: Kíria Nakahati e Guilherme Ishida são os responsáveis.
+# Ambos serão solicitados para revisar alterações neste módulo.
+/agendamento/ @KiriaNakahati @Guilherme-Ishida
