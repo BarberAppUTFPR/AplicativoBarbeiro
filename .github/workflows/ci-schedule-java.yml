@@ -1,4 +1,5 @@
 name: CI - schedule (Java)
+
 on:
   pull_request:
     branches: [ Dev ]
@@ -6,10 +7,17 @@ on:
       - 'schedule-service/**'
       - '.github/workflows/ci-schedule-java.yml'
   push:
-    branches: [ main ]
+    branches:
+      - main
+      - 'feat/**'
     paths:
       - 'schedule-service/**'
       - '.github/workflows/ci-schedule-java.yml'
+  workflow_dispatch: {}
+
+concurrency:
+  group: schedule-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build-lint-test:
@@ -22,7 +30,7 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '17'     
+          java-version: '17'
           cache: 'maven'
       - name: Build (no tests)
         run: mvn -B -q -DskipTests clean package
@@ -36,3 +44,4 @@ jobs:
         with:
           name: schedule-surefire
           path: schedule-service/target/surefire-reports
+
